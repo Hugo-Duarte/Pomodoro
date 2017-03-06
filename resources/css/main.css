@@ -11,7 +11,6 @@
     -fx-spacing: 20px;
 }
 
-
 #title {
     -fx-font-size: 31px;
 }
@@ -31,16 +30,16 @@
 }
 
 .button {
-  -fx-border-radius: 6px;
-  -fx-border-width: 2px;
-  -fx-border-style: solid;
-  -fx-border-color: #fff;
-  -fx-background-color: none;
-  -fx-text-fill: #fff;
-  -fx-fill-width: true;
-  -fx-cursor: pointer;
-  -fx-padding: 10px 10px 10px 37px;
-  -fx-font-size: 20px;
+    -fx-border-radius: 6px;
+    -fx-border-width: 2px;
+    -fx-border-style: solid;
+    -fx-border-color: #fff;
+    -fx-background-color: none;
+    -fx-text-fill: #fff;
+    -fx-fill-width: true;
+    -fx-cursor: pointer;
+    -fx-padding: 10px 10px 10px 37px;
+    -fx-font-size: 20px;
 
 }
 
@@ -53,7 +52,6 @@
     -fx-alignment: center-left;
 }
 
-
 .restart .button {
     -fx-padding: 10px 10px 10px 43px;
 }
@@ -62,7 +60,6 @@
     -fx-fill: #fff;
     -fx-height: 15px;
 }
-
 
 .text-area {
     -fx-pref-width: 300px;

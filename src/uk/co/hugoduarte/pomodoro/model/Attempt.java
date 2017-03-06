@@ -1,4 +1,4 @@
-package com.teamtreehouse.pomodoro.model;
+package uk.co.hugoduarte.pomodoro.model;
 
 public class Attempt {
     private String message;
@@ -15,16 +15,16 @@ public class Attempt {
         return message;
     }
 
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public int getRemainingSeconds() {
         return remainingSeconds;
     }
 
     public AttemptKind getKind() {
         return kind;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public void tick() {

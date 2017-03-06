@@ -1,8 +1,7 @@
-package com.teamtreehouse.pomodoro.controllers;
+package uk.co.hugoduarte.pomodoro.controllers;
 
-import com.teamtreehouse.pomodoro.model.Attempt;
-import com.teamtreehouse.pomodoro.model.AttemptKind;
-
+import uk.co.hugoduarte.pomodoro.model.Attempt;
+import uk.co.hugoduarte.pomodoro.model.AttemptKind;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,9 +12,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 import javafx.scene.media.AudioClip;
-
+import javafx.util.Duration;
 
 
 public class Home {
@@ -43,18 +41,18 @@ public class Home {
         return this.timerText.get();
     }
 
+    public void setTimerText(int remainingSeconds) {
+        int minutes = remainingSeconds / 60;
+        int seconds = remainingSeconds % 60;
+        setTimerText(String.format("%02d:%02d", minutes, seconds));
+    }
+
     public StringProperty timerTextProperty() {
         return this.timerText;
     }
 
     public void setTimerText(String timerText) {
         this.timerText.set(timerText);
-    }
-
-    public void setTimerText(int remainingSeconds) {
-        int minutes = remainingSeconds / 60;
-        int seconds = remainingSeconds % 60;
-        setTimerText(String.format("%02d:%02d", minutes, seconds));
     }
 
     private void prepareAttempt(AttemptKind kind) {
@@ -73,7 +71,7 @@ public class Home {
             saveCurrentAttempt();
             applause.play();
             prepareAttempt(currentAttempt.getKind() == AttemptKind.FOCUS ?
-                            AttemptKind.BREAK : AttemptKind.FOCUS);
+                    AttemptKind.BREAK : AttemptKind.FOCUS);
         });
     }
 
@@ -84,16 +82,18 @@ public class Home {
 
     private void reset() {
         clearAttemptStyles();
-        if(this.timeline != null && this.timeline.getStatus() == Animation.Status.RUNNING){
+        if (this.timeline != null && this.timeline.getStatus() == Animation.Status.RUNNING) {
             timeline.stop();
         }
     }
 
     public void playTimer() {
+        container.getStyleClass().add("playing");
         timeline.play();
     }
 
     public void pauseTimer() {
+        container.getStyleClass().remove("playing");
         timeline.pause();
     }
 
@@ -102,17 +102,26 @@ public class Home {
     }
 
     private void clearAttemptStyles() {
-        for (AttemptKind kind : AttemptKind.values()){
+        container.getStyleClass().remove("playing");
+        for (AttemptKind kind : AttemptKind.values()) {
             container.getStyleClass().remove(kind.toString().toLowerCase());
         }
-    }
-
-    public void DEBUG(ActionEvent actionEvent) {
-        prepareAttempt(AttemptKind.BREAK);
     }
 
     public void handleRestart(ActionEvent actionEvent) {
         prepareAttempt(AttemptKind.FOCUS);
         playTimer();
+    }
+
+    public void handlePlay(ActionEvent actionEvent) {
+        if (currentAttempt == null) {
+            handleRestart(actionEvent);
+        } else {
+            playTimer();
+        }
+    }
+
+    public void handlePause(ActionEvent actionEvent) {
+        pauseTimer();
     }
 }
