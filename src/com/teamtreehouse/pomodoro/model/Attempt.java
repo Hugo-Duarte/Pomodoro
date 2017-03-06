@@ -1,7 +1,29 @@
 package com.teamtreehouse.pomodoro.model;
 
-/**
- * Created by Hugo Duarte on 06/03/2017.
- */
 public class Attempt {
+    private String message;
+    private int remainingSeconds;
+    private AttemptKind kind;
+
+    public Attempt(AttemptKind kind, String message) {
+        this.kind = kind;
+        this.message = message;
+        this.remainingSeconds = kind.getTotalSeconds();
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public int getRemainingSeconds() {
+        return remainingSeconds;
+    }
+
+    public AttemptKind getKind() {
+        return kind;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
