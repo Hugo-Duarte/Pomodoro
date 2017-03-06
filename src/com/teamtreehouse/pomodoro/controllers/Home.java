@@ -2,6 +2,7 @@ package com.teamtreehouse.pomodoro.controllers;
 
 import com.teamtreehouse.pomodoro.model.Attempt;
 import com.teamtreehouse.pomodoro.model.AttemptKind;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import javafx.scene.media.AudioClip;
+
 
 
 public class Home {
@@ -28,10 +31,12 @@ public class Home {
     private Attempt currentAttempt;
     private StringProperty timerText;
     private Timeline timeline;
+    private AudioClip applause;
 
     public Home() {
         this.timerText = new SimpleStringProperty();
         setTimerText(0);
+        applause = new AudioClip(getClass().getResource("/sounds/applause.mp3").toExternalForm());
     }
 
     public String getTimerText() {
@@ -66,6 +71,7 @@ public class Home {
         }));
         timeline.setOnFinished(e -> {
             saveCurrentAttempt();
+            applause.play();
             prepareAttempt(currentAttempt.getKind() == AttemptKind.FOCUS ?
                             AttemptKind.BREAK : AttemptKind.FOCUS);
         });
